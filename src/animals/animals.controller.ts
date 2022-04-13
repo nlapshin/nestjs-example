@@ -7,6 +7,7 @@ import {
   HttpStatus,
   HttpException,
   Body,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { AnimalDto } from './animals.dto';
@@ -22,8 +23,8 @@ export class AnimalsController {
   }
 
   @Get('/:id')
-  async instance(@Param() params): Promise<AnimalDto> {
-    const animal = await this.animalsService.instance(+params.id);
+  async instance(@Param('id', ParseIntPipe) id: number): Promise<AnimalDto> {
+    const animal = await this.animalsService.instance(id);
 
     if (animal === null) {
       throw new HttpException(
