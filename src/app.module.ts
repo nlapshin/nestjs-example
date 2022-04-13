@@ -1,4 +1,6 @@
 import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+
 import { LoggerMiddleware } from './logger.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,7 +10,10 @@ import { DogsService } from './dogs/dogs.service';
 import { AnimalsModule } from './animals/animals.module';
 
 @Module({
-  imports: [AnimalsModule],
+  imports: [
+    AnimalsModule,
+    MongooseModule.forRoot('mongodb://localhost:27017/nest'),
+  ],
   controllers: [AppController, CatsController, DogsController],
   providers: [AppService, DogsService],
 })

@@ -16,18 +16,18 @@ export class AnimalsController {
   constructor(private animalsService: AnimalsService) {}
 
   @Get('/list')
-  list(): AnimalDto[] {
+  list(): Promise<AnimalDto[]> {
     return this.animalsService.list();
   }
 
   @Get('/:id')
-  instance(@Param() params): AnimalDto {
+  instance(@Param() params): Promise<AnimalDto> {
     return this.animalsService.instance(+params.id);
   }
 
   @Post('/:id')
   @HttpCode(HttpStatus.CREATED)
-  add(@Body() animal: AnimalDto): void {
+  add(@Body() animal: AnimalDto): Promise<AnimalDto> {
     return this.animalsService.add(animal);
   }
 }

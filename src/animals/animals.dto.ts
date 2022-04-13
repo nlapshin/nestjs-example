@@ -6,5 +6,5 @@ export class AnimalDto {
   @IsNotEmpty()
   name: string;
   @IsNotEmpty()
-  type: 'dog' | 'cat';
+  type: string;
 }

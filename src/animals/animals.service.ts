@@ -1,30 +1,27 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { Animal } from './animals.interface';
+import { AnimalModel, AnimalDocument } from './animals.schema';
+import { AnimalDto } from './animals.dto';
 
 @Injectable()
 export class AnimalsService {
-  private animals: Animal[];
+  constructor(
+    @InjectModel(AnimalModel.name) private animalModel: Model<AnimalDocument>,
+  ) {}
 
-  constructor() {
-    this.animals = [
-      { id: 1, name: 'barbos', type: 'dog' },
-      { id: 2, name: 'sharik', type: 'dog' },
-      { id: 3, name: 'barsik', type: 'cat' },
-    ];
+  list(): Promise<AnimalModel[]> {
+    return this.animalModel.find().exec();
   }
 
-  list(): Animal[] {
-    return this.animals;
+  instance(id: number): Promise<AnimalModel> {
+    return this.animalModel.findOne({ id }).exec();
   }
 
-  instance(id: number): Animal {
-    console.log(id);
+  add(animal: AnimalDto): Promise<AnimalModel> {
+    const createdAnimal = new this.animalModel(animal);
 
-    return this.animals.find((dog) => dog.id === id);
-  }
-
-  add(animal: Animal) {
-    this.animals.push(animal);
+    return createdAnimal.save();
   }
 }
