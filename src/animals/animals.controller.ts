@@ -5,6 +5,7 @@ import {
   Param,
   HttpCode,
   HttpStatus,
+  HttpException,
   Body,
 } from '@nestjs/common';
 
@@ -21,8 +22,20 @@ export class AnimalsController {
   }
 
   @Get('/:id')
-  instance(@Param() params): Promise<AnimalDto> {
-    return this.animalsService.instance(+params.id);
+  async instance(@Param() params): Promise<AnimalDto> {
+    const animal = await this.animalsService.instance(+params.id);
+
+    if (animal === null) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Incorrect id',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return animal;
   }
 
   @Post('/:id')
