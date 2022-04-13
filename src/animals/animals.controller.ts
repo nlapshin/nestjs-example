@@ -8,10 +8,12 @@ import {
   HttpException,
   Body,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 
 import { AnimalDto } from './animals.dto';
 import { AnimalsService } from './animals.service';
+import { AuthGuard } from '../auth.guard';
 
 @Controller('animals')
 export class AnimalsController {
@@ -22,7 +24,7 @@ export class AnimalsController {
     return this.animalsService.list();
   }
 
-  @Get('/:id')
+  @Get('/instance/:id')
   async instance(@Param('id', ParseIntPipe) id: number): Promise<AnimalDto> {
     const animal = await this.animalsService.instance(id);
 
@@ -39,9 +41,15 @@ export class AnimalsController {
     return animal;
   }
 
-  @Post('/:id')
+  @Post('/instance/:id')
   @HttpCode(HttpStatus.CREATED)
   add(@Body() animal: AnimalDto): Promise<AnimalDto> {
     return this.animalsService.add(animal);
+  }
+
+  @Get('/secret-route')
+  @UseGuards(AuthGuard)
+  secretRoute() {
+    return 'secret';
   }
 }
