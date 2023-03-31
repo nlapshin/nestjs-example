@@ -8,3 +8,5 @@ export class AnimalDto {
   @IsNotEmpty()
   type: string;
 }
+
+// Data transfer object

@@ -11,3 +11,6 @@ export class AuthGuard implements CanActivate {
     return request.headers.token === 'password';
   }
 }
+
+// Basic Auth.
+// JWT + Oauth.

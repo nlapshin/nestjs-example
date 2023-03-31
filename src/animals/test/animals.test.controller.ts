@@ -11,12 +11,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { AnimalDto } from './animals.dto';
-import { AnimalsService } from './animals.service';
-import { AuthGuard } from '../auth.guard';
+import { AnimalDto } from '../animals.dto';
+import { AnimalsService } from '../animals.service';
+import { AuthGuard } from '../../auth.guard';
 
-@Controller('animals')
-export class AnimalsController {
+@Controller('animals/test')
+export class AnimalsTestController {
   constructor(private animalsService: AnimalsService) {}
 
   @Get('/list')

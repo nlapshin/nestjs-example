@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
+export type AnimalType = 'cats' | 'dogs';
+
 @Schema()
 export class AnimalModel {
   @Prop({ required: true })
@@ -10,7 +12,7 @@ export class AnimalModel {
   name: string;
 
   @Prop({ required: true })
-  type: string;
+  type: AnimalType;
 }
 
 export type AnimalDocument = AnimalModel & Document;
