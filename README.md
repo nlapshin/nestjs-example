@@ -71,3 +71,32 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+
+
+
+# API Server
+
+- должен работать.
+- валидацию(JSON Schema, Joi, императивный способ валидировать данные, GraphQL)
+- документация(OpenAPI схемы или JSON Schema + swagger, GraphQL).
+- общего обработчика ошибок.
+
+## Nest.JS
+
+Платформа.
+
+Хотим писать бизнес логику, а все остальные вещи релизовать как можно быстрее.
+
+- Typescript из коробки.
+- CLI
+- Архитектура.
+- Быстрый старт по написанию бизнес логики.
+- Развитое комьюнити.
+
+NestJS - это большая обертка над express или fastify
+
+https://docs.nestjs.com/fundamentals/custom-providers
+https://docs.nestjs.com/fundamentals/testing
+https://docs.nestjs.com/fundamentals/injection-scopes
